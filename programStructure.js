@@ -102,11 +102,14 @@ switch (theWeather) {
 // #####
 // ######
 // #######
+// This is my solution
 let symbol = "";
 for (let i = 1; i <= 7; i++) {
   symbol += "#";
   console.log(symbol);
 }
+// This is the solution in the book
+for (let line = "#"; line.length < 8; line += "#") console.log(line);
 
 // * Exercise 2 *
 // FizzBuzz Write a program that uses console.log to print all the numbers from 1 to 100,
@@ -135,18 +138,32 @@ for (let i = 1; i <= 100; i++) {
 // # # # #
 //  # # # #
 // # # # #
-let size = 16;
+// This is my solution
+let size = 8;
 let board = "";
 for (let i = 0; i < size; i++) {
   let row = "";
-  if (i % 2 == 0) row += " "
+  if (i % 2 == 0) row += " ";
 
   for (let j = 0; j < size; j++) {
     if (j % 2 === 0) row += "#";
     else row += " ";
   }
 
-  row += "\n"
+  row += "\n";
   board += row;
 }
 console.log(board);
+
+// This is the solution in the book
+let size2 = 8;
+let board2 = "";
+
+for (let i = 0; i < size; i++) {
+  for (let j = 0; j < size; j++) {
+    if ((i + j) % 2 == 0) board2 += " ";
+    else board2 += "#";
+  }
+  board2 += "\n";
+}
+console.log(board2);

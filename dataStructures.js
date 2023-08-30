@@ -191,3 +191,23 @@ function max(...numbers) {
 }
 
 console.log(max(4, 1, 9, -2));
+
+numbers = [1, 2, 3, 4, 5];
+console.log(max(...numbers));
+
+function randomPointOnCircle(radius) {
+  let angle = Math.random() * 2 * Math.PI;
+  return { x: radius * Math.cos(angle), y: radius * Math.sin(angle) };
+}
+
+console.log(randomPointOnCircle(2));
+
+// Destructuring
+let { name } = { name: "Miguel", age: 23 };
+console.log(name);
+
+// JSON
+let string = JSON.stringify({ squirrel: false, events: ["weekend"] });
+console.log(string);
+
+console.log(JSON.parse(string).events);

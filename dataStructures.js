@@ -211,3 +211,108 @@ let string = JSON.stringify({ squirrel: false, events: ["weekend"] });
 console.log(string);
 
 console.log(JSON.parse(string).events);
+
+// Exercices
+// The sum of a range
+const range = (start, end, step = 1) => {
+  let array = [];
+  if (start <= end) {
+    for (let i = start; i <= end; i += step) array.push(i);
+  } else {
+    for (let i = start; i >= end; i += step) array.push(i);
+  }
+  return array;
+};
+
+const sum = (items) => {
+  let result = 0;
+  for (let item of items) result += item;
+  return result;
+};
+
+console.log(sum(range(1, 10))); // -> 55
+console.log(range(1, 10, 2));
+console.log(range(5, 2, -1));
+
+// Reversing array
+const reverseArray = (array) => {
+  let reversedArray = [];
+  for (let i = array.length - 1; i >= 0; i--) reversedArray.push(array[i]);
+  return reversedArray;
+};
+
+const reverseArrayInPlace = (array) => {
+  for (let i = 0; i < Math.floor(array.length / 2); i++) {
+    oldValue = array[i];
+    array[i] = array[array.length - 1 - i];
+    array[array.length - 1 - i] = oldValue;
+  }
+  return array;
+};
+
+console.log(reverseArray(["A", "B", "C"])); // -> ["C", "B", "A"];
+let arrayValue = [1, 2, 3, 4, 5];
+reverseArrayInPlace(arrayValue);
+console.log(arrayValue); // -> [5, 4, 3, 2, 1]
+
+// A list
+const arrayToList = (array) => {
+  let list = null;
+  for (let i = array.length - 1; i >= 0; i--) {
+    list = { value: array[i], rest: list };
+  }
+  return list;
+};
+
+const listToArray = (list) => {
+  let array = [];
+
+  while (list) {
+    array.push(list.value);
+    list = list.rest;
+  }
+  return array;
+};
+
+const prepend = (element, list) => {
+  // Adds the element to the front of the list
+  return { value: element, rest: list };
+};
+
+const nth = (list, position) => {
+  // Returns the element at the given position
+  if (!list) return undefined;
+  else if (position == 0) return list.value;
+  else return nth(list.rest, position - 1);
+};
+
+console.log(arrayToList([10, 20])); // {value: 10, rest: {value: 20, rest: null}}
+console.log(arrayToList([10, 20, 30]));
+console.log(listToArray(arrayToList([10, 20, 30]))); // -> [10, 20, 30]
+
+console.log(prepend(10, prepend(20, null))); // -> {value: 10, rest: {value: 20, rest: null}}
+console.log(nth(arrayToList([10, 20, 30]), 1)); // -> 20
+
+// Deep Comparison
+const deepEqual = (a, b) => {
+  if (a === b) return true;
+
+  if (a == null || typeof a != "object" || b == null || typeof b != "object")
+    return false;
+
+  let keysA = Object.keys(a),
+    keysB = Object.keys(b);
+
+  if (keysA.length != keysB.length) return false;
+
+  for (let key of keysA) {
+    if (!keysB.includes(key) || !deepEqual(a[key], b[key])) return false;
+  }
+
+  return true;
+}
+
+let obj = { here: { is: "an" }, object: 2 };
+console.log(deepEqual(obj, obj)); // -> true
+console.log(deepEqual(obj, { here: 1, object: 2 })); // -> false
+console.log(deepEqual(obj, { here: { is: "an" }, object: 2 })); // -> true

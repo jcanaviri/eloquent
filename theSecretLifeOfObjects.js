@@ -43,8 +43,183 @@ console.log(Object.getPrototypeOf([]) == Array.prototype); // -> true
 let protoRabbit = {
   speak(line) {
     console.log(`The ${this.type} rabbit says '${line}'`);
-  }
-}
+  },
+};
 let killerRabbit = Object.create(protoRabbit);
 killerRabbit.type = "killer";
 killerRabbit.speak("SKREEE!"); // -> The killer rabbit says 'SKREEE!'
+
+// Prototypes
+function makeRabbit(type) {
+  let rabbit = Object.create(protoRabbit);
+  rabbit.type = type;
+  return rabbit;
+}
+
+function Rabbit(type) {
+  this.type = type;
+}
+
+Rabbit.prototype.speak = function (line) {
+  console.log(`The ${this.type} rabbit says '${line}'`);
+};
+
+let weirdRabbit = new Rabbit("weird");
+
+console.log(Object.getPrototypeOf(Rabbit) == Function.prototype); // -> true
+console.log(Object.getPrototypeOf(weirdRabbit) == Rabbit.prototype); // -> true
+
+// Class notation
+class Rabbit2 {
+  constructor(type) {
+    this.type = type;
+  }
+  speak(line) {
+    console.log(`The ${this.type} rabbit says '${line}'`);
+  }
+}
+let killerRabbit2 = new Rabbit2("killer");
+let blackRabbit = new Rabbit2("black");
+
+let object = new (class {
+  getWord() {
+    return "hello";
+  }
+})();
+console.log(object.getWord()); // -> hello
+
+Rabbit2.prototype.teeth = "small";
+console.log(killerRabbit2.teeth); // -> small
+
+killerRabbit2.teeth = "long, sharp and bloody";
+
+console.log(killerRabbit2.teeth); // -> long, sharp and bloody
+console.log(blackRabbit.teeth); // -> small
+console.log(Rabbit2.prototype.teeth); // -> small
+
+// Overriting
+console.log(Array.prototype.toString == Object.prototype.toString); // -> false
+console.log([1, 2].toString()); // -> 1,2
+console.log(Object.prototype.toString.call([1, 2])); // -> [object Array]
+
+// Maps
+let ages = {
+  Boris: 39,
+  Liang: 22,
+  Julia: 62,
+};
+
+console.log(`Julia is ${ages["Julia"]}`); // -> Julia is 62
+console.log("Is Jack's age known?", "Jack" in ages); // -> Is Jack's age known? false
+console.log("Is toString's age known?", "toString" in ages); // Is toString's age known? true
+
+console.log("toString" in Object.create(null)); // -> false
+
+let ages2 = new Map();
+ages2.set("Boris", 39);
+ages2.set("Liang", 22);
+ages2.set("Julia", 62);
+
+console.log(`Julia is ${ages2.get("Julia")}`); // -> Julia is 62
+console.log("Is Jack's age known?", ages2.has("Jack")); // -> Is Jack's age known? false
+console.log("Is toString's age known?", ages2.has("toString")); // Is toString's age known? false
+
+console.log({ x: 1 }.hasOwnProperty("x")); // -> true
+console.log({ x: 1 }.hasOwnProperty("toString")); // -> false
+
+// Polimorphism
+Rabbit2.prototype.toString = function () {
+  return `a ${this.type} rabbit`;
+};
+
+console.log(String(blackRabbit)); // -> a black rabbit
+
+// Symbols
+// This value is unique and I cannot create the same symbol twice
+let sym = Symbol("name");
+console.log(sym == Symbol("name")); // -> false
+
+Rabbit2.prototype[sym] = 55;
+console.log(blackRabbit[sym]); // -> 55
+
+const toStringSymbol = Symbol("toString");
+Array.prototype[toStringSymbol] = function () {
+  return `${this.length} cm of blue yarn`;
+};
+
+console.log([1, 2].toString()); // -> 1, 2
+console.log([1, 2][toStringSymbol]()); // -> 2 cm of blue yarn
+
+let stringObject = {
+  [toStringSymbol]() {
+    return "a jute rope";
+  },
+};
+console.log(stringObject.toString()); // -> [object Object]
+console.log(stringObject[toStringSymbol]()); // -> a jute rope
+
+// The iterator interface
+let okIterator = "OK"[Symbol.iterator]();
+console.log(okIterator.next()); // -> {value: "O", done: false}
+console.log(okIterator.next()); // -> {value: "K", done: false}
+console.log(okIterator.next()); // -> {value: undefined, done: true}
+
+class Matrix {
+  constructor(width, height, element = (x, y) => undefined) {
+    this.width = width;
+    this.height = height;
+    this.content = [];
+
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        this.content[y * width + x] = element(x, y);
+      }
+    }
+  }
+
+  get(x, y) {
+    return this.content[y * this.width + x];
+  }
+
+  set(x, y, value) {
+    this.content[y * this.width + x] = value;
+  }
+}
+
+class MatrixIterator {
+  constructor(matrix) {
+    this.x = 0;
+    this.y = 0;
+    this.matrix = matrix;
+  }
+
+  next() {
+    if (this.y == this.matrix.height) return { done: true };
+    let value = {
+      x: this.x,
+      y: this.y,
+      value: this.matrix.get(this.x, this.y),
+    };
+    this.x++;
+    if (this.x === this.matrix.width) {
+      this.x = 0;
+      this.y++;
+    }
+    return { value, done: false };
+  }
+}
+
+Matrix.prototype[Symbol.iterator] = function () {
+  return new MatrixIterator(this);
+};
+
+// We can now loop over a matrix with for/of
+let matrix = new Matrix(2, 2, (x, y) => `value ${x}, ${y}`);
+for (let { x, y, value } of matrix) {
+  console.log(x, y, value);
+}
+
+// -> 0 0 value 0, 0
+// -> 1 0 value 1, 0
+// -> 0 1 value 0, 1
+// -> 1 1 value 1, 1

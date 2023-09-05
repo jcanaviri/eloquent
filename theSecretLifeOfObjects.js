@@ -218,8 +218,67 @@ let matrix = new Matrix(2, 2, (x, y) => `value ${x}, ${y}`);
 for (let { x, y, value } of matrix) {
   console.log(x, y, value);
 }
-
 // -> 0 0 value 0, 0
 // -> 1 0 value 1, 0
 // -> 0 1 value 0, 1
 // -> 1 1 value 1, 1
+
+let varyingSize = {
+  get size() {
+    return Math.floor(Math.random() * 100);
+  },
+};
+
+console.log(varyingSize.size);
+console.log(varyingSize.size);
+
+class Temperature {
+  constructor(celsius) {
+    this.celsius = celsius;
+  }
+
+  get fahrenheit() {
+    return this.celsius * 1.8 + 32;
+  }
+
+  set fahrenheit(value) {
+    this.celsius = (value - 32) / 1.8;
+  }
+
+  static fromFahrenheit(value) {
+    return new Temperature((value - 32) / 1.8);
+  }
+}
+
+let temperture = new Temperature(10);
+console.log(temperture.fahrenheit); // -> 50
+temperture.fahrenheit = 86;
+console.log(temperture.celsius); // -> 30
+
+let anotherTemperture = Temperature.fromFahrenheit(100);
+console.log(anotherTemperture.celsius);
+
+// Inheritance
+class SymmetricMatrix extends Matrix {
+  constructor(size, element = (x, y) => undefined) {
+    super(size, size, (x, y) => {
+      if (x < y) return element(y, x);
+      else return element(x, y);
+    });
+  }
+
+  set(x, y, value) {
+    super.set(x, y, value);
+    if (x !== y) {
+      super.set(y, x, value);
+    }
+  }
+}
+
+let symetricMatrix = new SymmetricMatrix(5, (x, y) => `${x}, ${y}`);
+console.log(symetricMatrix.get(2, 3)); // -> 3, 2
+
+console.log(new SymmetricMatrix(2) instanceof SymmetricMatrix); // -> true
+console.log(new SymmetricMatrix(2) instanceof Matrix); // -> true
+console.log(new Matrix(2, 2) instanceof SymmetricMatrix); // -> false
+console.log([1] instanceof Array); // -> true

@@ -1,33 +1,33 @@
-// This is how we chreate a simple definition of a variable
+// Declare a variable
 let caught = 5 * 5;
 
 // We use variables so we can use their values in other parts of the code
 let ten = 10;
-console.log(ten * ten); // -> 100
+console.log(ten * ten); // Output: 100
 
-// We can change the value any time we want
+// We can change the value any time
 let mood = "light";
-console.log(mood); // -> light
+console.log(mood); // Output: light
 
 mood = "dark";
-console.log(mood); // -> dark
+console.log(mood); // Output: dark
 
 let luigisDebt = 140;
 luigisDebt = luigisDebt - 35;
-console.log(luigisDebt); // -> 105
+console.log(luigisDebt); // Output: 105
 
 let one = 1,
   two = 2;
-console.log(one + two); // -> 3
+console.log(one + two); // Output: 3
 
 // We can use the keywords 'var' and 'const'
-var name = "Josue";
+var myName = "Josue";
 const greeting = "Hello ";
-console.log(greeting + name); // -> Hello Josue
+console.log(greeting + myName); // Output: Hello Josue
 
 // Functions
-console.log(Math.max(2, 4)); // -> 4
-console.log(Math.min(2, 4) + 100); // -> 102
+console.log(Math.max(2, 4)); // Output: 4
+console.log(Math.min(2, 4) + 100); // Output: 102
 
 // Conditional execution
 let theNumber = null;
@@ -53,7 +53,7 @@ while (counter < 10) {
   result *= 2;
   counter++;
 }
-console.log(result);
+console.log(result); // Output: 1024
 
 // do-while loop
 let result2 = 1;
@@ -63,18 +63,18 @@ do {
   counter2++;
 } while (counter2 < 10);
 
-console.log(result2);
+console.log(result2); // Output: 1024
 
 // for loop
-for (let number = 0; number < 10; number += 2) {
+for (let number = 0; number < 5; number += 2) {
   console.log(number);
 }
 
 let result3 = 1;
-for (let counter3 = 0; counter3 < 10; counter3++) {
+for (let counter3 = 0; counter3 < 5; counter3++) {
   result3 *= 2;
 }
-console.log(result3);
+console.log(result3); // Output: 32
 
 // Switch statement
 let theWeather = "rainy";
@@ -92,16 +92,9 @@ switch (theWeather) {
     break;
 }
 
-// * Exercise 1 *
-// LOOPING A TRIANGLE Write a loop that makes seven calls to console.log to output the following
-// triangle:
-// #
-// ##
-// ###
-// ####
-// #####
-// ######
-// #######
+// Exercises
+// Looping a triangle
+
 // This is my solution
 let symbol = "";
 for (let i = 1; i <= 7; i++) {
@@ -109,15 +102,11 @@ for (let i = 1; i <= 7; i++) {
   console.log(symbol);
 }
 // This is the solution in the book
-for (let line = "#"; line.length < 8; line += "#") console.log(line);
+for (let line = "#"; line.length < 8; line += "#") {
+  console.log(line);
+}
 
-// * Exercise 2 *
-// FizzBuzz Write a program that uses console.log to print all the numbers from 1 to 100,
-// with two exceptions. For numbers divisible by 3, print "Fizz" instead of the
-// number, and for numbers divisible by 5 (and not 3), print "Buzz" instead.
-// When you have that working, modify your program to print "FizzBuzz" for
-// numbers that are divisible by both 3 and 5 (and still print "Fizz" or "Buzz"
-// for numbers divisible by only one of those).
+// FizzBuzz
 for (let i = 1; i <= 100; i++) {
   let output = "";
   if (i % 3 === 0) output += "fizz";
@@ -125,19 +114,8 @@ for (let i = 1; i <= 100; i++) {
   console.log(output || i);
 }
 
-// * Exercise 3 *
-// Chessboard Write a program that creates a string that represents an 8×8 grid, using newline
-// characters to separate lines. At each position of the grid there is either a space
-// or a "#" character. The characters should form a chessboard.
-// Passing this string to console.log should show something like this:
-//  # # # #
-// # # # #
-//  # # # #
-// # # # #
-//  # # # #
-// # # # #
-//  # # # #
-// # # # #
+// Chessboard
+
 // This is my solution
 let size = 8;
 let board = "";

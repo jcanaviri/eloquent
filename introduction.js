@@ -4,15 +4,15 @@ let total = 0,
 
 while (count <= 10) {
   total += count;
-  count += 1;
+  count++;
 }
 
-console.log(total); // -> 55
+console.log(total); // Output: 55
 
-// This code calculates the factorial of any number
+// This code calculates the factorial of a number
 function factorial(n) {
   if (n === 0) return 1;
   else return n * factorial(n - 1);
 }
 
-console.log(factorial(8)); // -> 40320
+console.log(factorial(8)); // Output: 40320

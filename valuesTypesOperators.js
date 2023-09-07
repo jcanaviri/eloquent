@@ -1,76 +1,76 @@
 // The most basic type is the number
-console.log(42); // -> 42
+console.log(42); // Output: 42
 
-// it also could be a decimal number, the separator must be '.'
-console.log(2.54); // -> 2.54
+// Decimal numbers are written with a dot '.'
+console.log(2.54); // Output: 2.54
 
 // We can apply mathematical expressions
 console.log(100 + 4 * 11); // 144
 
-// if we want to the plus operation applies first we need to do this
-console.log((100 + 4) * 11); // -> 1144
+// if we want to the plus operation applies first we need to use parenthesis
+console.log((100 + 4) * 11); // Output: 1144
 
 // NaN means not a number
-console.log(0 / 0); // -> NaN
-console.log(Infinity - Infinity); // -> NaN
+console.log(0 / 0); // Output: NaN
+console.log(Infinity - Infinity); // Output: NaN
 
-// The next basic data type is the string. Strings are used to represent text.
-// They are written by enclosing their content in quotes.
+// Strings
 console.log(`Down on the sea`);
-console.log("Lie on the ocean");
+// prettier-ignore
+console.log('Lie on the ocean');
 console.log("Float on the ocean");
 
-// There are some special characters for example:
+// Special characters
 console.log("This is the first line\nAnd this is the second");
 
 // Concatenation
 console.log("con" + "cat" + "e" + "nate");
 
 // Backtick-quotes
-console.log(`Half of 100 is ${100 / 2}`); // -> Half of 100 is 50
+console.log(`Half of 100 is ${100 / 2}`); // Output: Half of 100 is 50
 
 // Unary Operators
-console.log(typeof 2.54); // -> Number
-console.log(typeof "x"); // -> String
-console.log(-(10 - 2)); // -> -8
+console.log(typeof 2.54); // Output: Number
+console.log(typeof "x"); // Output: String
+console.log(-(10 - 2)); // Output: -8
 
 // Comparator operators
-console.log(3 > 2); // -> true
-console.log(3 < 2); // -> false
-console.log("Aardvark" < "Zoroaster"); // -> true
-console.log("Itchy" != "Scratchy"); // -> true
-console.log("Apple" == "Orange"); // -> false
+console.log(3 > 2); // Output: true
+console.log(3 < 2); // Output: false
+console.log("Aardvark" < "Zoroaster"); // Output: true
+console.log("Itchy" != "Scratchy"); // Output: true
+console.log("Apple" == "Orange"); // Output: false
 // Special case
 console.log(NaN == NaN);
 
 // Boolean operators
 // AND
-console.log(true && false); // -> false
-console.log(true && true); // -> true
+console.log(true && false); // Output: false
+console.log(true && true); // Output: true
 // OR
-console.log(false || true); // -> true
-console.log(false || false); // -> false
+console.log(false || true); // Output: true
+console.log(false || false); // Output: false
 // NOT
-console.log(!true); // -> false
-console.log(!false); // -> true
+console.log(!true); // Output: false
+console.log(!false); // Output: true
 
 // The ternary operator
-console.log(true ? 1 : 2); // -> 1
-console.log(false ? 1 : 2); // -> 2
+console.log(true ? 1 : 2); // Output: 1
+console.log(false ? 1 : 2); // Output: 2
 
 // Empty Values
 console.log(undefined);
 console.log(null);
 
 // Automatic type conversion
-console.log(8 * null); // -> 0
-console.log("5" - 1); // -> 4
-console.log("5" + 1); // -> 6? 🙅‍♂️ -> 51
-console.log("five" * 2); // -> NaN
-console.log(false == 0); // -> true
-console.log(null == undefined); // -> true
-console.log(null == 0); // -> false
+console.log(8 * null); // Output: 0
+console.log("5" - 1); // Output: 4
+console.log("5" + 1); // Output: 6? 🙅‍♂️ Output: 51
+console.log("five" * 2); // Output: NaN
+console.log(false == 0); // Output: true
+console.log(null == undefined); // Output: true
+console.log(null == 0); // Output: false
 
 // Short-circuiting of logical operators
-console.log(null || "user"); // -> user
-console.log("Agnes" || "user"); // -> Agnes
+console.log(null || "user"); // Output: user
+console.log("Agnes" || "user"); // Output: Agnes

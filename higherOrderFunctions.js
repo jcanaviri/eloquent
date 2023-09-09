@@ -4,12 +4,6 @@ const SCRIPTS = require("./scripts");
 for (let i = 0; i <= 5; i++) {
   console.log(i);
 }
-// -> 0
-// -> 1
-// -> 2
-// -> 3
-// -> 4
-// -> 5
 
 // We can abstract into a function
 function repeatLog(n) {
@@ -17,6 +11,8 @@ function repeatLog(n) {
     console.log(i);
   }
 }
+
+repeatLog(5);
 
 // But what if we want to do something else
 function repeat(n, action) {
@@ -26,20 +22,20 @@ function repeat(n, action) {
 }
 
 repeat(3, console.log);
-// -> 0
-// -> 1
-// -> 2
+// Output: 0
+// Output: 1
+// Output: 2
 
 let labels = [];
 repeat(5, (i) => labels.push(`Unit ${i + 1}`));
-console.log(labels); // -> [ 'Unit 1', 'Unit 2', 'Unit 3', 'Unit 4', 'Unit 5' ]
+console.log(labels); // Output: [ 'Unit 1', 'Unit 2', 'Unit 3', 'Unit 4', 'Unit 5' ]
 
 function greatherThan(n) {
   return (m) => m > n;
 }
 
 let greatherThanTen = greatherThan(10);
-console.log(greatherThanTen(11)); // -> true
+console.log(greatherThanTen(11)); // Output: true
 
 function noisy(f) {
   return (...args) => {
@@ -51,8 +47,8 @@ function noisy(f) {
 }
 
 noisy(Math.min)(3, 2, 1);
-// -> Calling with 3,2,1
-// -> Called with 3, 2, 1, returned 1
+// Output: Calling with 3,2,1
+// Output: Called with 3, 2, 1, returned 1
 
 function unless(test, then) {
   if (!test) then();
@@ -63,13 +59,13 @@ repeat(3, (n) => {
     console.log(`${n} is even`);
   });
 });
-// -> 0 is even
-// -> 2 is even
+// Output: 0 is even
+// Output: 2 is even
 
 // Now there is a forEach method from arrays, that gives us this:
 ["A", "B"].forEach((l) => console.log(l));
-// -> A
-// -> B
+// Output: A
+// Output: B
 
 // Filtering arrays
 function filter(array, test) {
@@ -107,7 +103,7 @@ function reduce(array, combine, start) {
   return current;
 }
 
-console.log(reduce([1, 2, 3, 4], (a, b) => a + b, 0)); // -> 10
+console.log(reduce([1, 2, 3, 4], (a, b) => a + b, 0)); // Output: 10
 
 function characterCount(script) {
   return script.ranges.reduce((count, [from, to]) => {
@@ -123,7 +119,7 @@ console.log(
 
 let biggest = null;
 for (let script of SCRIPTS) {
-  if (biggest == null || characterCount(biggest) < characterCount(script)) {
+  if (biggest === null || characterCount(biggest) < characterCount(script)) {
     biggest = script;
   }
 }
@@ -148,7 +144,7 @@ for (let script of SCRIPTS) {
     count += 1;
   }
 }
-console.log(Math.round(total / count)); // -> 1165
+console.log(Math.round(total / count)); // Output: 1165
 
 // Strings and character codes
 function characterScript(code) {
@@ -167,11 +163,11 @@ console.log(characterScript(121));
 
 // Two emoji characters, horse and shoe
 let horseShoe = "🐴👞";
-console.log(horseShoe.length); // -> 4
+console.log(horseShoe.length); // Output: 4
 
-console.log(horseShoe[0]); // -> (Invalid half-character)
-console.log(horseShoe.charCodeAt(0)); // -> 55357 (Code of the half-character)
-console.log(horseShoe.codePointAt(0)); // -> 128052 (Actual code for horse emoji)
+console.log(horseShoe[0]); // Output: (Invalid half-character)
+console.log(horseShoe.charCodeAt(0)); // Output: 55357 (Code of the half-character)
+console.log(horseShoe.codePointAt(0)); // Output: 128052 (Actual code for horse emoji)
 
 let roseDragon = "🌹🐉";
 for (let char of roseDragon) {
@@ -214,7 +210,7 @@ console.log(textScripts('英国的狗说"woof", 俄罗斯的狗说"тяв"'));
 // Exercises
 
 // Flattening
-let arrays = [[1, 2, 3], [4, 5], [6]]; // -> [1, 2, 3, 4, 5, 6]
+let arrays = [[1, 2, 3], [4, 5], [6]]; // Output: [1, 2, 3, 4, 5, 6]
 
 console.log(arrays.reduce((a, b) => a.concat(b), []));
 
@@ -249,9 +245,9 @@ function every2(array, test) {
   return !array.some((i) => !test(i));
 }
 
-console.log(every2([1, 3, 5], (n) => n < 10)); // -> true
-console.log(every2([2, 4, 16], (n) => n < 10)); // -> false
-console.log(every2([], (n) => n < 10)); // -> true
+console.log(every2([1, 3, 5], (n) => n < 10)); // Output: true
+console.log(every2([2, 4, 16], (n) => n < 10)); // Output: false
+console.log(every2([], (n) => n < 10)); // Output: true
 
 // Dominant direction
 function dominantDirection(text) {
@@ -265,5 +261,5 @@ function dominantDirection(text) {
   return counted.reduce((a, b) => (a.count > b.count ? a : b)).name;
 }
 
-console.log(dominantDirection("Hello!")); // -> ltr
-console.log(dominantDirection("Hey, مساء الخير")); // -> rtl
+console.log(dominantDirection("Hello!")); // Output: ltr
+console.log(dominantDirection("Hey, مساء الخير")); // Output: rtl
